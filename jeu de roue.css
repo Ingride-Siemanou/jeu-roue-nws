@@ -1,0 +1,423 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Fira Sans", Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: #111;
+    min-height: 100vh;
+}
+
+.header {
+    height: 90px;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #dddddd;
+}
+
+.logo {
+    width: 240px;
+    height: 150px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.header-title {
+    font-family: "Fugaz One", Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 2px;
+}
+
+.score {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+}
+.score span {
+    color: #00a5a5;
+}
+
+.game {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 60px;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.mini-title {
+    color: #00a5a5;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.intro h2 {
+    font-family: "Fugaz One", Arial, sans-serif;
+    font-size: clamp(38px, 5vw, 65px);
+    color: #111;
+    line-height: 1;
+}
+
+.intro h2 span {
+    color: #fec800;
+}
+
+.intro > p:last-child {
+    margin-top: 15px;
+    color: #555;
+    font-size: 17px;
+}
+
+.wheel-zone {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 90px;
+}
+
+.wheel-wrapper {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    flex-shrink: 0;
+}
+
+.wheel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 9px solid #ffffff;
+    background: conic-gradient(
+        #00a5a5 0deg 51.43deg,
+        #fec800 51.43deg 102.86deg,
+        #ef4b35 102.86deg 154.29deg,
+        #00a5a5 154.29deg 205.72deg,
+        #fec800 205.72deg 257.15deg,
+        #ef4b35 257.15deg 308.58deg,
+        #fec800 308.58deg 360deg
+    );
+
+    box-shadow:
+        0 0 0 6px #222,
+        0 15px 35px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 4.5s cubic-bezier(0.12, 0.8, 0.18, 1);
+}
+
+.wheel-text {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 120px;
+    min-height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 1.15;
+    color: #ffffff;
+    text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.45);
+
+    transform:
+        translate(-50%, -50%)
+        rotate(var(--angle))
+        translateY(-145px)
+        rotate(calc(-1 * var(--angle)));
+
+    z-index: 2;
+}
+
+.text1 {
+    --angle: 25.71deg;
+}
+
+.text2 {
+    --angle: 77.14deg;
+
+    color: #111;
+    text-shadow: none;
+}
+
+.text3 {
+    --angle: 128.57deg;
+}
+
+.text4 {
+    --angle: 180deg;
+}
+
+.text5 {
+    --angle: 231.43deg;
+
+    color: #111;
+    text-shadow: none;
+}
+
+.text6 {
+    --angle: 282.86deg;
+}
+
+.text7 {
+    --angle: 334.29deg;
+}
+
+.wheel-center {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 95px;
+    height: 95px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+    color: #111;
+    border: 6px solid #111;
+    border-radius: 50%;
+    font-family: "Fugaz One", Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+
+    z-index: 10;
+}
+
+.pointer {
+    position: absolute;
+
+    top: -27px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+
+    border-left: 23px solid transparent;
+    border-right: 23px solid transparent;
+    border-top: 47px solid #111;
+    z-index: 20;
+    filter:
+        drop-shadow(0 3px 2px rgba(0, 0, 0, 0.2));
+}
+
+.controls {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#spinButton {
+    width: 100%;
+
+    border: none;
+
+    background: #fec800;
+
+    color: #111;
+
+    padding: 19px 25px;
+
+    border-radius: 12px;
+    font-family: "Fugaz One", Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        color 0.2s,
+        transform 0.2s;
+}
+
+
+#spinButton:hover {
+    background: #00a5a5;
+    color: #ffffff;
+    transform: translateY(-3px);
+}
+
+
+#spinButton:active {
+    transform: translateY(0);
+}
+
+
+#spinButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.result {
+    width: 100%;
+    min-height: 110px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #f7f7f7;
+    border: 1px solid #dddddd;
+    border-radius: 14px;
+    color: #111;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .wheel-zone {
+        gap: 45px;
+    }
+
+    .wheel-wrapper {
+        width: 380px;
+        height: 380px;
+    }
+
+    .wheel-text {
+        width: 105px;
+        font-size: 12px;
+        transform:
+            translate(-50%, -50%)
+            rotate(var(--angle))
+            translateY(-123px)
+            rotate(calc(-1 * var(--angle)));
+    }
+
+    .controls {
+        width: 250px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .header {
+        height: 75px;
+        padding: 0 15px;
+    }
+
+    .logo {
+        width: 110px;
+        height: 55px;
+        margin-left: 30px;
+    }
+
+    .header-title {
+        display: none;
+    }
+
+    .score {
+        font-size: 15px;
+margin-right: 50px;
+    }
+
+    .game {
+        min-height: calc(100vh - 75px);
+
+        padding: 30px 15px 50px;
+    }
+
+    .intro {
+        margin-bottom: 45px;
+    }
+
+    .mini-title {
+        font-size: 15px;
+        letter-spacing: 3px;
+    }
+    .intro h2 {
+        font-size: 30px;
+    }
+
+    .intro > p:last-child {
+        font-size: 14px;
+    }
+
+    .wheel-zone {
+        flex-direction: column;
+        gap: 55px;
+    }
+    .wheel-wrapper {
+        width: 320px;
+        height: 320px;
+    }
+    .wheel {
+        border-width: 7px;
+        box-shadow:
+            0 0 0 4px #222,
+            0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    .wheel-text {
+        width: 85px;
+        min-height: 30px;
+        font-size: 10px;
+        transform:
+            translate(-50%, -50%)
+            rotate(var(--angle))
+            translateY(-103px)
+            rotate(calc(-1 * var(--angle)));
+    }
+    .wheel-center {
+        width: 72px;
+        height: 72px;
+        border-width: 5px;
+        font-size: 15px;
+    }
+    .pointer {
+        top: -22px;
+        border-left-width: 18px;
+        border-right-width: 18px;
+        border-top-width: 38px;
+    }
+    .controls {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+@media (max-width: 360px) {
+    .wheel-wrapper {
+        width: 280px;
+        height: 280px;
+    }
+    .wheel-text {
+        width: 75px;
+        font-size: 9px;
+        transform:
+            translate(-50%, -50%)
+            rotate(var(--angle))
+            translateY(-90px)
+            rotate(calc(-1 * var(--angle)));
+    }
+}
